@@ -4,7 +4,7 @@ echo "Docker container info."
 echo "==================================================================================================="
 echo "USAGE :"
 echo " docker build --force-rm -t \${docker_name} -f docker_file/Dockerfile_\${docker_name}"
-echo " docker run -w \$PWD -v \$PWD:\$PWD \${docker_name} sh -c \". ~/.bashrc && . docker_file/extract_docker_info.sh\""
+echo " docker run -w \$PWD -v \$PWD:\$PWD \${docker_name} sh -c \". ~/.bashrc && . ./extract_docker_info.sh\""
 echo "---------------------------------------------------------------------------------------------------"
 os=$(cat /etc/os-release | grep 'PRETTY_NAME' | cut -d '=' -f 2 | cut -d '"' -f 2) 
 echo "OS : ${os}"
