@@ -11,7 +11,7 @@ cd docker_file/; docker build --force-rm --shm-size=64g -t ${docker_name} -f Doc
 #################################################################################################
 #   docker info.
 #docker run --rm -it -w $PWD -v $PWD:$PWD ${docker_name} bash docker_file/extract_docker_info.sh
-docker run --rm -it -w $PWD -v $PWD:$PWD ${docker_name} sh -c ". ~/.bashrc && . docker_file/extract_docker_info.sh"
+docker run --rm -it -w $PWD -v $PWD:$PWD ${docker_name} sh -c ". ~/.bashrc && . ./extract_docker_info.sh"
 #END
 
 #: << 'END'
