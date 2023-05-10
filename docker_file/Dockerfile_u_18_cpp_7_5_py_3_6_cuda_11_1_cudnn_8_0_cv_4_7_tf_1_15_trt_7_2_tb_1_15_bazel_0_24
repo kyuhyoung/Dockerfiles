@@ -1,0 +1,23 @@
+FROM nvcr.io/nvidia/tensorflow:20.10-tf1-py3
+#FROM nvcr.io/nvidia/tensorflow:20.06-tf1-py3
+#FROM nvcr.io/nvidia/tensorflow:22.02-tf1-py3
+#FROM nvcr.io/nvidia/tensorflow:19.10-py3
+#FROM nvcr.io/nvidia/tensorflow:19.06-py3
+RUN apt-get update
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get install build-essential git gedit fish -y
+RUN apt install ffmpeg -y
+RUN apt-get install libboost-dev
+RUN git clone https://github.com/MPI-IS/mesh.git
+RUN /usr/bin/python -m pip install --upgrade pip
+RUN apt-get install freeglut3-dev -y
+RUN cd mesh && make all && make tests
+COPY requirements.txt . 
+RUN pip3 install -r requirements.txt
+RUN pip3 uninstall pillow -y
+RUN apt-get update && apt-get install -y --fix-missing libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
+RUN wget https://bootstrap.pypa.io/pip/3.6/get-pip.py && python3 get-pip.py
+RUN CC="cc -mavx2" pip3 install -U --force-reinstall pillow-simd
+RUN apt update && wget https://github.com/mmatl/travis_debs/raw/master/xenial/mesa_18.3.3-0.deb && dpkg -i ./mesa_18.3.3-0.deb || true && apt install -f -y
+RUN git clone https://github.com/mmatl/pyopengl.git && pip3 install pillow ./pyopengl
+CMD ["fish"]

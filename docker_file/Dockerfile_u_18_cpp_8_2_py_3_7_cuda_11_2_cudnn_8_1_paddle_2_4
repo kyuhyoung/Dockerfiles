@@ -1,0 +1,13 @@
+FROM paddlepaddle/paddle:2.4.1-gpu-cuda11.2-cudnn8.2-trt8.0
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update --fix-missing
+
+RUN apt-get install -y gedit fish
+
+RUN pip install pymatting scikit-image numba opencv-python natsort
+
+RUN pip install scikit-learn
+
+CMD "fish"
